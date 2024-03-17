@@ -1,7 +1,7 @@
-Useful lcommands:
+Useful commands:
 
 ```bash
-~~~~
+
 find . -type f \( -name "*.cs" -o -name "*.json" -o -name "*.razor" -o -name "*.csproj" -o -name "*.sln" -o -name "*.css" \) ! -name "*.min.css" -exec cat {} + > all_code.txt
 
 cd src/IaC/
