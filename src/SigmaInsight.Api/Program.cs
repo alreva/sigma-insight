@@ -1,3 +1,5 @@
+using SigmaInsight.Api;
+
 var builder = WebApplication.CreateSlimBuilder(args);
 
 builder.Services.ConfigureHttpJsonOptions(options =>

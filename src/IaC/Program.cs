@@ -3,6 +3,7 @@ using Pulumi.Kubernetes.Types.Inputs.Core.V1;
 using Pulumi.Kubernetes.Types.Inputs.Apps.V1;
 using Pulumi.Kubernetes.Types.Inputs.Meta.V1;
 using System.Collections.Generic;
+using IaC;
 using Pulumi.Kubernetes.Core.V1;
 
 void BuildDeployment(Constants.DeploymentSpec spec)
