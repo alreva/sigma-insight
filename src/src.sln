@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SigmaInsight.Api", "SigmaIn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SigmaInsight.Web", "SigmaInsight.Web\SigmaInsight.Web.csproj", "{5269D5A9-BC52-40C9-9297-62478834CAFC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IaC", "IaC\IaC.csproj", "{1B5735CF-95A1-4E81-A08E-3ACFDE50AFBD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{5269D5A9-BC52-40C9-9297-62478834CAFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5269D5A9-BC52-40C9-9297-62478834CAFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5269D5A9-BC52-40C9-9297-62478834CAFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B5735CF-95A1-4E81-A08E-3ACFDE50AFBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B5735CF-95A1-4E81-A08E-3ACFDE50AFBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B5735CF-95A1-4E81-A08E-3ACFDE50AFBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B5735CF-95A1-4E81-A08E-3ACFDE50AFBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
