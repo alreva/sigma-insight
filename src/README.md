@@ -6,6 +6,13 @@ find . -type f \( -name "*.cs" -o -name "*.json" -o -name "*.razor" -o -name "*.
 
 cd src/IaC/
 
+minikube start
+minikube addons enable registry
+eval $(minikube docker-env)
+minikube tunnel
+minikube dashboard
+
+
 COMMIT_HASH=$(git rev-parse --short HEAD)
 docker build -t localhost:5000/sigma/sigma-insight-web:0.1-$COMMIT_HASH ../../src/SigmaInsight.Web/.
 docker push localhost:5000/sigma/sigma-insight-web:0.1-$COMMIT_HASH
@@ -21,6 +28,7 @@ docker pull localhost:5000/sigma/sigma-insight-web:latest
 docker build -t localhost:5000/sigma/sigma-insight-api:latest ../../src/SigmaInsight.Api/.
 docker push localhost:5000/sigma/sigma-insight-api:latest
 docker pull localhost:5000/sigma/sigma-insight-api:latest
+
 
 
 pulumi up --yes
