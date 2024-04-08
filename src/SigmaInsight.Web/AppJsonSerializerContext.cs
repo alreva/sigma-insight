@@ -1,14 +1,14 @@
 using System.Text.Json.Serialization;
-using SigmaInsight.Api.Ai;
+using SigmaInsight.Web.Ai;
+using SigmaInsight.Web.Ai.OpenAi;
 
-namespace SigmaInsight.Api;
+namespace SigmaInsight.Web;
 
 [JsonSourceGenerationOptions(
     WriteIndented = true,
     PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase)]
 [JsonSerializable(typeof(OpenAiRequest))]
 [JsonSerializable(typeof(OpenAiResponse))]
-[JsonSerializable(typeof(Todo[]))]
 internal partial class AppJsonSerializerContext : JsonSerializerContext
 {
 

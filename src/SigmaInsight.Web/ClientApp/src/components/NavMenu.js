@@ -16,9 +16,10 @@ export class NavMenu extends Component {
   }
 
   toggleNavbar () {
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
+    this.setState(state => ({
+      ...state,
+      collapsed: !state.collapsed
+    }));
   }
 
   render() {
@@ -34,6 +35,12 @@ export class NavMenu extends Component {
               </NavItem>
               <NavItem>
                 <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink tag={Link} className="text-dark" to="/no-refinement">No Refinement</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink tag={Link} className="text-dark" to="/prompt-engineering">Prompt Engineering</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>

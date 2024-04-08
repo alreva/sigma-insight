@@ -1,0 +1,25 @@
+@SigmaInsight.Web_HostAddress = https://localhost:44413
+
+GET {{SigmaInsight.Web_HostAddress}}/ai/
+Accept: application/json
+
+###
+
+POST {{SigmaInsight.Web_HostAddress}}/ai/no-refinement
+Content-Type: application/json
+
+{
+  "prompt": "Who is Sigma Executive Vice President?"
+}
+
+###
+
+POST {{SigmaInsight.Web_HostAddress}}/ai/prompt-engineering
+Content-Type: application/json
+
+{
+  "prompt": "Who is Sigma Executive Vice President?"
+}
+
+###
+

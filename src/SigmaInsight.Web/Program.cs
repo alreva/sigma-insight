@@ -1,8 +1,31 @@
+using SigmaInsight.Web.Ai;
+using SigmaInsight.Web.Ai.OpenAi;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Configuration.AddJsonFile("appsettings.runtime.json", optional: false, reloadOnChange: true);
+
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<SigmaInsightAiService>();
+builder.Services.AddHttpClient<OpenAiClient>();
+var openAiSettings = builder
+    .Configuration
+    .GetSection("OpenAI")
+    .Get<OpenAiSettings>()!;
+builder.Services.AddHttpClient<OpenAiClient>(client =>
+{
+    client.BaseAddress = new Uri(openAiSettings.BaseAddress);
+    client.DefaultRequestHeaders.Add("Authorization", $"Bearer {openAiSettings.ApiKey}");
+});
+
+var sigmaInsightAiSettings = builder
+    .Configuration
+    .GetSection("SigmaInsightAI")
+    .Get<SigmaInsightAiSettings>()!;
+builder.Services.AddSingleton(sigmaInsightAiSettings);
 
 var app = builder.Build();
 

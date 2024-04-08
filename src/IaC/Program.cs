@@ -42,7 +42,11 @@ void BuildDeployment(Constants.DeploymentSpec spec)
                                 {
                                     ContainerPortValue = spec.TargetPort,
                                 }
-                            }
+                            },
+                            Env =
+                            {
+                                new EnvVarArgs { Name = "ASPNETCORE_ENVIRONMENT", Value = "Development" },
+                            },
                         },
                     }
                 }
