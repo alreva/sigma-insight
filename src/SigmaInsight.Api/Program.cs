@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.OutputCaching;
 using SigmaInsight.Api;
-using SigmaInsight.Api.Ai;
 
 var builder = WebApplication.CreateSlimBuilder(args);
 
@@ -9,15 +8,6 @@ builder.Services.AddOutputCache();
 builder.Services.ConfigureHttpJsonOptions(options =>
 {
     options.SerializerOptions.TypeInfoResolverChain.Insert(0, AppJsonSerializerContext.Default);
-});
-
-var openAiSettings = builder.Configuration
-    .GetSection("OpenAI")
-    .Get<OpenAiSettings>()!;
-builder.Services.AddHttpClient<OpenAiClient>(client =>
-{
-    client.BaseAddress = new Uri(openAiSettings.BaseAddress);
-    client.DefaultRequestHeaders.Add("Authorization", $"Bearer {openAiSettings.ApiKey}");
 });
 
 var app = builder.Build();
