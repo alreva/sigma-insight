@@ -2,31 +2,34 @@ using System.Text.Json;
 
 namespace SigmaInsight.Web.Ai.OpenAi;
 
-public class OpenAiClient(HttpClient httpClient, ILogger<OpenAiClient> logger)
+public class OpenAiClient(
+    HttpClient httpClient,
+    OpenAiSettings settings,
+    ILogger<OpenAiClient> logger)
 {
-    public async Task<OpenAiResponse> ExecuteQuery(string context, string prompt)
+    public async Task<OpenAiResponse> ExecuteQuery(OpenAiRequest openAiRequest)
     {
         logger.LogInformation("Base address: {BaseAddress}", httpClient.BaseAddress);
 
-        OpenAiRequest requestData = new()
+        OpenAiHttpRequestDto httpRequestDtoData = new()
         {
-            Model = "gpt-3.5-turbo", // or any other model
+            Model = openAiRequest.Model ?? "gpt-3.5-turbo", // or any other model
             Messages = new[]
             {
-                new Message("system", context),
-                new Message("user", prompt),
+                new Message("system", openAiRequest.Context),
+                new Message("user", openAiRequest.Prompt),
             },
-            Temperature = 0.5,
+            Temperature = settings.Temperature,
             MaxTokens = 800
         };
         
         logger.LogInformation(
             "Request data: {@Request}",
-            JsonSerializer.Serialize(requestData, AppJsonSerializerContext.Default.OpenAiRequest));
+            JsonSerializer.Serialize(httpRequestDtoData, AppJsonSerializerContext.Default.OpenAiHttpRequestDto));
         using var httpResponse = await httpClient.PostAsJsonAsync(
             "",
-            requestData,
-            AppJsonSerializerContext.Default.OpenAiRequest);
+            httpRequestDtoData,
+            AppJsonSerializerContext.Default.OpenAiHttpRequestDto);
         httpResponse.EnsureSuccessStatusCode();
         var response = (await httpResponse.Content.ReadFromJsonAsync(AppJsonSerializerContext.Default.OpenAiResponse))!;
         logger.LogInformation(

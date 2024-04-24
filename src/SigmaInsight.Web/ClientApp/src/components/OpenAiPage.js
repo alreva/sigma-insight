@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {Button, FloatingLabel, Form, ListGroup, Stack} from "react-bootstrap";
+import {Button, FloatingLabel, Form, ListGroup, Spinner, Stack} from "react-bootstrap";
 
-export default () => {
+export default ({ controller }) => {
 
   const statuses = {
     "idle": "idle",
@@ -26,8 +26,10 @@ export default () => {
     evt.preventDefault();
     console.log(question);
     
+    setStatus(statuses.loading);
+    
     // call api
-    const response = await fetch(`api/ai/prompt-engineering`, {
+    const response = await fetch(`api/ai/${controller.httpEndpoint}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -39,13 +41,29 @@ export default () => {
     console.log(data);
     
     setAnswer(data.result);
+    setStatus(statuses.success);
+  }
+  
+  const getValue = () => {
+    if (status === statuses.success) {
+      return answer;
+    }
+    
+    if (status === statuses.error) {
+      return "Error occurred. Please try again.";
+    }
+    
+    if (status === statuses.loading) {
+      return <Spinner />
+    }
+    
+    return "Response will be shown here";
   }
   
   return (
     <>
-      <h1>OpenAI Prompt Engineering</h1>
-      <p>This component demonstrates how the response from Open AI is altered with prompt engineering.</p>
-      {status === statuses.loading && <p><em>Loading...</em></p>}
+      <h1>{controller.pageTitle}</h1>
+      <p>{controller.pageDescription}</p>
 
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formQuestion">
@@ -63,18 +81,15 @@ export default () => {
                   onChange={handleQuestionChange}
                 />
               </FloatingLabel>
-              <Form.Text className="text-muted">
+              <Form.Text>
                 This is sent to Open AI endpoint and put as a prompt.
               </Form.Text>
             </div>
             
             <div>
-              <Form.Control
-                type={"text"}
-                as={"textarea"}
-                value={answer}
-                readOnly
-                placeholder={"Result will be displayed here."}/>
+              <div style={{ minHeight: 120 }}>
+                {getValue()}
+              </div>
             </div>
             <div>
               <p>Pick from the predefined questions:</p>
@@ -82,9 +97,8 @@ export default () => {
                 [
                   "Who is Sigma Software CEO?",
                   "Who is Sigma Software Executive Vice President?",
-                  "Who is Sigma Software Executive Vice President?" +
-                  " Your response should contain his/her name and surname only," +
-                  " several names if there are multiple"
+                  "Who is Sigma Software Vice President?",
+                  "Who is Sigma Software Chief Innovation Officer?"
                 ]
                   .map((q, i) =>
                     <p key={i}><Button value={q} variant={"light"} onClick={handleSelect}> {q} </Button></p>

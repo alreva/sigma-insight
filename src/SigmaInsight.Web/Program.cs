@@ -11,21 +11,26 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<SigmaInsightAiService>();
 builder.Services.AddHttpClient<OpenAiClient>();
+
 var openAiSettings = builder
     .Configuration
     .GetSection("OpenAI")
     .Get<OpenAiSettings>()!;
+builder.Services.AddTransient(svcs =>
+    svcs.GetRequiredService<IConfiguration>()
+        .GetSection("OpenAI")
+        .Get<OpenAiSettings>()!);
+
 builder.Services.AddHttpClient<OpenAiClient>(client =>
 {
     client.BaseAddress = new Uri(openAiSettings.BaseAddress);
     client.DefaultRequestHeaders.Add("Authorization", $"Bearer {openAiSettings.ApiKey}");
 });
 
-var sigmaInsightAiSettings = builder
-    .Configuration
-    .GetSection("SigmaInsightAI")
-    .Get<SigmaInsightAiSettings>()!;
-builder.Services.AddSingleton(sigmaInsightAiSettings);
+builder.Services.AddTransient(svcs =>
+    svcs.GetRequiredService<IConfiguration>()
+        .GetSection("SigmaInsightAI")
+        .Get<SigmaInsightAiSettings>()!);
 
 var app = builder.Build();
 

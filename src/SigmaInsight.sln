@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SigmaInsight.Web", "SigmaIn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IaC", "IaC\IaC.csproj", "{1B5735CF-95A1-4E81-A08E-3ACFDE50AFBD}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "GeneratePositionsText", "GeneratePositionsText\GeneratePositionsText.fsproj", "{06A318BB-BF31-41AE-8127-547DB29B14E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{1B5735CF-95A1-4E81-A08E-3ACFDE50AFBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B5735CF-95A1-4E81-A08E-3ACFDE50AFBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B5735CF-95A1-4E81-A08E-3ACFDE50AFBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06A318BB-BF31-41AE-8127-547DB29B14E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06A318BB-BF31-41AE-8127-547DB29B14E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06A318BB-BF31-41AE-8127-547DB29B14E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06A318BB-BF31-41AE-8127-547DB29B14E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -45,7 +45,23 @@ void BuildDeployment(Constants.DeploymentSpec spec)
                             },
                             Env =
                             {
-                                new EnvVarArgs { Name = "ASPNETCORE_ENVIRONMENT", Value = "Development" },
+                                new EnvVarArgs
+                                {
+                                    Name = "ASPNETCORE_ENVIRONMENT",
+                                    Value = "Development"
+                                },
+                                new EnvVarArgs
+                                {
+                                    Name = "OpenAI__ApiKey",
+                                    ValueFrom = new EnvVarSourceArgs
+                                    {
+                                        SecretKeyRef = new SecretKeySelectorArgs
+                                        {
+                                            Name = "sigma-insight",
+                                            Key = "api-key"
+                                        }
+                                    }
+                                },
                             },
                         },
                     }

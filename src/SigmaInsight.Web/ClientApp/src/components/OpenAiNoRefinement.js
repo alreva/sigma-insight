@@ -26,7 +26,7 @@ export default () => {
     console.log(question);
     
     // call api
-    var response = await fetch(`ai/no-refinement`, {
+    var response = await fetch(`api/ai/no-refinement`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -68,9 +68,12 @@ export default () => {
               </Form.Text>
             </div>
             <div>
-              <p>
-                {answer || "Result will be displayed here."}
-              </p>
+              <Form.Control
+                type={"text"}
+                as={"textarea"}
+                value={answer}
+                readOnly
+                placeholder={"Result will be displayed here."}/>
             </div>
             <div>
               <p>Pick from the predefined questions:</p>

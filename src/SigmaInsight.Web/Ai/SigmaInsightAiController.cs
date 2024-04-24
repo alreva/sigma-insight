@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace SigmaInsight.Web.Ai;
 
 [ApiController]
-[Route("ai")]
+[Route("api/ai")]
 public class SigmaInsightAiController(ILogger<SigmaInsightAiController> logger) : ControllerBase
 {
     [HttpGet]
@@ -28,6 +28,15 @@ public class SigmaInsightAiController(ILogger<SigmaInsightAiController> logger) 
         [FromBody] OpenAiRequestModel model)
     {
         var result = await sigmaInsightAi.QueryWithPromptEngineering(model.Prompt);
+        return Ok(new { result });
+    }
+
+    [HttpPost, Route("fine-tuned")]
+    public async Task<ActionResult<string>> FineTuned(
+        [FromServices] SigmaInsightAiService sigmaInsightAi,
+        [FromBody] OpenAiRequestModel model)
+    {
+        var result = await sigmaInsightAi.QueryFineTuned(model.Prompt);
         return Ok(new { result });
     }
     

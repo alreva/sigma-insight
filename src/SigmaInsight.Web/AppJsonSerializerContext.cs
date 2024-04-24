@@ -7,7 +7,7 @@ namespace SigmaInsight.Web;
 [JsonSourceGenerationOptions(
     WriteIndented = true,
     PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase)]
-[JsonSerializable(typeof(OpenAiRequest))]
+[JsonSerializable(typeof(OpenAiHttpRequestDto))]
 [JsonSerializable(typeof(OpenAiResponse))]
 internal partial class AppJsonSerializerContext : JsonSerializerContext
 {

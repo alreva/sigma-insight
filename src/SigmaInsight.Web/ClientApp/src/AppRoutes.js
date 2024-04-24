@@ -3,6 +3,9 @@ import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
 import OpenAiNoRefinement from "./components/OpenAiNoRefinement";
 import OpenAiPromptEngineering from "./components/OpenAiPromptEngineering";
+import OpenAiFineTuned from "./components/OpenAiFineTuned";
+import OpenAiPage from "./components/OpenAiPage";
+import Controllers from "./components/OpenAiControllers";
 
 const AppRoutes = [
   {
@@ -11,11 +14,15 @@ const AppRoutes = [
   },
   {
     path: '/no-refinement',
-    element: <OpenAiNoRefinement />
+    element: <OpenAiPage controller={Controllers.noRefinement} />
   },
   {
     path: '/prompt-engineering',
-    element: <OpenAiPromptEngineering />
+    element: <OpenAiPage controller={Controllers.promptEngineering} />
+  },
+  {
+    path: '/fine-tuned',
+    element: <OpenAiPage controller={Controllers.fineTuned} />
   },
   {
     path: '/counter',
